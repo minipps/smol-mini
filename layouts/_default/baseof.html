@@ -114,13 +114,8 @@
 	{{ partial "footer" . }}
 </body>
 <script defer>
-	/**
-	 * Theming.
-	 *
-	 * Supports the preferred color scheme of the operation system as well as
-	 * the theme choice of the user.
-	 *
-	 */
+	// Source: https://github.com/rhazdon/hugo-theme-hello-friend-ng
+	// TODO: Simplify this for my purposes, maybe even switch to HTML + CSS only hackery for darkmode
 	const themeToggle = document.querySelector(".theme-toggle");
 	const chosenTheme = window.localStorage && window.localStorage.getItem("theme");
 	const chosenThemeIsDark = chosenTheme == "dark";

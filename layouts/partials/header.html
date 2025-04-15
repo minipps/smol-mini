@@ -1,25 +1,29 @@
 <header>
 	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}<br>
-	== <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a> ==<br>
-	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}
-	<div style="float: right;">{{ .Site.Params.subtitle }}</div><br>
+	== <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a> 
+	<div style="float: right;">{{ .Site.Params.subtitle }}</div>==<br>
+	{{ if hugo.IsMultilingual }}
+	<div style="float: right;">Other languages: 
+	{{ range $.Translations }}
+		<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
+	{{ end }}
+	</div>
+{{ end }}
+
+	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}<br>
+	
 	<p>
 	<nav>
 			<a href="/"><b>Start</b></a>.
+
 			{{ with .Site.Menus.main }}
 				{{ range sort . ".Identifier" }}
 				<a href="{{ .URL | relLangURL }}"><b>{{ .Name }}</b></a>.
 				{{ end }}
 			{{ end }}
+
 			{{ if .Site.Params.EnableThemeToggle }}
-				<span class="theme-toggle not-selectable"><a class="theme-toggler">toggle theme</a></span>
-			{{ end }}
-			{{ if hugo.IsMultilingual }}
-				<div style="float: right;"> Other languages: 
-				{{ range $.Translations }}
-					<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
-				{{ end }}
-				</div>
+				<span style="float: right;" class="theme-toggle not-selectable"><a class="theme-toggler">toggle theme</a></span>
 			{{ end }}
 			
 	</nav>
