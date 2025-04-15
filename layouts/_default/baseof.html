@@ -107,6 +107,17 @@
 		}
 		</script>
 	{{ end }}
+
+	{{ block "title" . }}
+    <title lang="{{ .Site.Language }}">
+        {{ if .IsHome }}
+            {{ $.Site.Params.HumanTitle }} {{ with $.Site.Title }} — {{ . }} {{ end }}
+        {{ else }}
+            {{ .Title }} — {{ $.Site.Params.HumanTitle }} {{ with $.Site.Title }} — {{ . }} {{ end }}
+        {{ end }}
+    </title>
+{{ end }}
+
 </head>
 <body>
 	{{ partial "header" . }}
