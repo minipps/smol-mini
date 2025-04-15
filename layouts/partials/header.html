@@ -7,17 +7,22 @@
 	<nav>
 			<a href="/"><b>Start</b></a>.
 			{{ with .Site.Menus.main }}
-			{{ range sort . ".Identifier" }}
-			<a href="{{ .URL | relLangURL }}"><b>{{ .Name }}</b></a>.
+				{{ range sort . ".Identifier" }}
+				<a href="{{ .URL | relLangURL }}"><b>{{ .Name }}</b></a>.
+				{{ end }}
+			{{ end }}
+			{{ if .Site.Params.EnableThemeToggle }}
+				<span class="theme-toggle not-selectable"><a class="theme-toggler">toggle theme</a></span>
 			{{ end }}
 			{{ if hugo.IsMultilingual }}
-				<div  style="float: right;"> Other languages: 
+				<div style="float: right;"> Other languages: 
 				{{ range $.Translations }}
 					<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
 				{{ end }}
 				</div>
 			{{ end }}
+			
 	</nav>
 	</p>
-	{{ end }}
+
 </header>

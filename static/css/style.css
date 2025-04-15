@@ -1,24 +1,30 @@
+@import 'colors.css';
 html {
     overflow-y: scroll;
 }
-:root {
-    --bgcolor: --ctp-latte-base;
-    --fontcolor: --ctp-latte-text;
-    --linkcolor: --ctp-latte-blue-rgb;
-    --visitedcolor: --ctp-latte-mauve;
-    --precolor: --ctp-latte-base;
-    --prebgcolor: --ctp-latte-text;
+
+:root[data-theme=light] {
+    --bgcolor: var(--ctp-latte-base);
+    --fontcolor: var(--ctp-latte-text);
+    --linkcolor: var(--ctp-latte-blue);
+    --visitedcolor: var(--ctp-latte-mauve);
+    --precolor: var(--ctp-latte-base);
+    --prebgcolor: var(--ctp-latte-text);     
 }
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bgcolor: --ctp-mocha-base;
-        --fontcolor: --ctp-mocha-text;
-        --linkcolor: --ctp-mocha-blue;
-        --visitedcolor: --ctp-mocha-mauve;
-        --precolor: --ctp-mocha-base;
-        --prebgcolor: --ctp-mocha-text;
-    }
+
+
+
+:root[data-theme=dark] {
+    --bgcolor: var(--ctp-mocha-base);
+    --fontcolor: var(--ctp-mocha-text);
+    --linkcolor: var(--ctp-mocha-blue);
+    --visitedcolor: var(--ctp-mocha-mauve);
+    --precolor: var(--ctp-mocha-base);
+    --prebgcolor: var(--ctp-mocha-text);     
 }
+
+
+
 body {
     max-width: 800px;
     margin: 40px auto;
