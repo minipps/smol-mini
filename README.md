@@ -1,25 +1,31 @@
-# smol
+# smol-mini
 
-A minimal, monospaced blogging theme for Hugo that respects your privacy and is easy on your bandwidth. A demo can be found at https://smol-demo.morph.sh.
+## NOTE:
+This fork is a WIP and used for personal purposes. Documentation may not be up to date and extra configuration may be needed. I'm adding a lot of features to this theme, but still need to update the installation guide. If you want something stable, go use [the original](https://github.com/colorchestra/smol).  
 
-smol is based on [Blank](https://github.com/Vimux/Blank) created by [Vimux](https://github.com/Vimux).
+## Description 
+A minimal, monospaced blogging theme for Hugo that respects your privacy and is easy on your bandwidth. A demo can be found at https://dospuntostr.es.
+
+smol-mini is based on [Smol](https://github.com/colorchestra/smol) by morph which itsel is based on [Blank](https://github.com/Vimux/Blank) created by [Vimux](https://github.com/Vimux).
 
 
 ![Screenshot](/images/tn.png)
 
 ## Features
 
-- No JavaScript
+- (Almost) No JavaScript
 - No Google spyware or tracking of any kind
 - No other external dependencies, embedded fonts or comment sections
-- Dark mode support (depending on your OS's setting)
+- Dark mode support + Toggling support
+- Catpuccin Latte and Mocha color themes
+- SEO friendly 
 
 ## Installation
 
 In your Hugo site `themes` directory, run:
 
 ```
-git clone https://github.com/colorchestra/smol
+git clone https://github.com/minipps/smol
 ```
 
 Next, open `config.toml` in the base of the Hugo site and ensure the theme option is set to `smol`.
@@ -85,8 +91,8 @@ You can add captions to images (technically using `<figcaption>` HTML tags) by a
 
 ## Contributing
 
-Have you found a bug or got an idea for a new feature? Feel free to use the [issue tracker](https://github.com/colorchestra/smol/issues) to let me know. Or make directly a [pull request](https://github.com/colorchestra/smol/pulls).
+Have you found a bug or got an idea for a new feature? Feel free to use the [issue tracker](https://github.com/minipps/smol/issues) to let me know. Or make directly a [pull request](https://github.com/minipps/smol/pulls).
 
 ## License
 
-This theme is released under the [MIT license](https://github.com/colorchestra/smol/blob/master/LICENSE).
+This theme is released under the [MIT license](https://github.com/minipps/smol/blob/master/LICENSE).
