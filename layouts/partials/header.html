@@ -7,15 +7,15 @@
 	<nav>
 			<a href="/"><b>Start</b></a>.
 			{{ with .Site.Menus.main }}
-			{{ range . }}
-			<a href="{{ .URL | relURL }}"><b>{{ .Name }}</b></a>.
+			{{ range sort . ".Identifier" }}
+			<a href="{{ .URL | relLangURL }}"><b>{{ .Name }}</b></a>.
 			{{ end }}
 			{{ if hugo.IsMultilingual }}
-				<a> Other languages: 
+				<div  style="float: right;"> Other languages: 
 				{{ range $.Translations }}
 					<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
 				{{ end }}
-				</a>
+				</div>
 			{{ end }}
 	</nav>
 	</p>
