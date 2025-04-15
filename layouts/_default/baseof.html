@@ -14,7 +14,16 @@
 	<meta name="theme-color" content="{{ .Site.Params.themeColor }}" />
 	<meta http-equiv="content-language" content="{{ .Site.Language }}">
 	<link rel="canonical" href="{{ .Permalink }}" />
-	<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+	{{ with resources.Get "css/main.css" }}
+		{{ with . | minify | fingerprint}}
+			<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer>
+		{{end }}
+	{{ end }}
+	{{ with resources.Get "js/theme.js" }}
+		{{ with . | minify | fingerprint "sha256"}}
+			<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+		{{end}}
+	{{ end }}
 	{{ range .Site.Params.customCSS -}}
 		<link rel="stylesheet" href="{{ . | relURL }}?rnd={{ now.Unix }}">
 	{{- end }}
@@ -124,58 +133,5 @@
 	{{ block "main" . }}{{ end }}
 	{{ partial "footer" . }}
 </body>
-<script defer>
-	// Source: https://github.com/rhazdon/hugo-theme-hello-friend-ng
-	// TODO: Simplify this for my purposes, maybe even switch to HTML + CSS only hackery for darkmode
-	const themeToggle = document.querySelector(".theme-toggle");
-	const chosenTheme = window.localStorage && window.localStorage.getItem("theme");
-	const chosenThemeIsDark = chosenTheme == "dark";
-	const chosenThemeIsLight = chosenTheme == "light";
 
-	// Detect the color scheme the operating system prefers.
-	function detectOSColorTheme() {
-	if (chosenThemeIsDark) {
-		document.documentElement.setAttribute("data-theme", "dark");
-	} else if (chosenThemeIsLight) {
-		document.documentElement.setAttribute("data-theme", "light");
-	} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-		document.documentElement.setAttribute("data-theme", "dark");
-	} else {
-		document.documentElement.setAttribute("data-theme", "light");
-	}
-	}
-
-	// Switch the theme.
-	function switchTheme(e) {
-	if (chosenThemeIsDark) {
-		localStorage.setItem("theme", "light");
-	} else if (chosenThemeIsLight) {
-		localStorage.setItem("theme", "dark");
-	} else {
-		if (document.documentElement.getAttribute("data-theme") == "dark") {
-		localStorage.setItem("theme", "light");
-		} else {
-		localStorage.setItem("theme", "dark");
-		}
-	}
-
-	detectOSColorTheme();
-	window.location.reload();
-	}
-
-	// Event listener
-	if (themeToggle) {
-	themeToggle.addEventListener("click", switchTheme, false);
-	window
-		.matchMedia("(prefers-color-scheme: dark)")
-		.addEventListener("change", (e) => e.matches && detectOSColorTheme());
-	window
-		.matchMedia("(prefers-color-scheme: light)")
-		.addEventListener("change", (e) => e.matches && detectOSColorTheme());
-
-	detectOSColorTheme();
-	} else {
-	localStorage.removeItem("theme");
-	}
-</script>
 </html>
