@@ -10,6 +10,13 @@
 			{{ range . }}
 			<a href="{{ .URL | relURL }}"><b>{{ .Name }}</b></a>.
 			{{ end }}
+			{{ if hugo.IsMultilingual }}
+				<a> Other languages: 
+				{{ range $.Translations }}
+					<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
+				{{ end }}
+				</a>
+			{{ end }}
 	</nav>
 	</p>
 	{{ end }}
