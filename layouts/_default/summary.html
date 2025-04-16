@@ -1,10 +1,10 @@
-<article>
-	<h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-	<b><time>{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}</time></b>
+<article class="h-entry">
+	<h2><a href="{{ .Permalink }}" class="p-name u-url">{{ .Title }}</a></h2>
+	<b><time class="dt-published">{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}</time></b>
 	{{ range .Params.tags }}
 	<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
 	{{ end }}
-	<div>
+	<div class="p-summary">
 		{{ .Summary }}
 		{{ if .Truncated }}
 			<a href="{{ .Permalink }}">Read more...</a>
