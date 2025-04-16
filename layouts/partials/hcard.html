@@ -1,0 +1,12 @@
+{{ $invisible := not .Site.Params.hcard.visible}}
+
+<span class="p-nickname {{if $invisible}}invisible{{end}}">{{.Site.Params.hcard.nickname}}</span>
+<span class="u-url {{if $invisible}}invisible{{end}}" href="{{.Site.BaseURL}}"></span>
+<noscript><img src="u-photo {{if $invisible}}invisible{{end}}" src="{{ .Site.Params.hcard.photo | absURL }}" loading="lazy"></img></noscript>
+<style>
+    .invisible {
+        display: none !important;
+        height: 0px !important;
+        width: 0px !important;
+    }
+</style>

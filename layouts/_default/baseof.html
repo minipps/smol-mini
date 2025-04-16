@@ -20,7 +20,7 @@
 		{{end }}
 	{{ end }}
 	{{ with resources.Get "js/theme.js" }}
-		{{ with . | minify | fingerprint "sha256"}}
+		{{ with . | js.Build | minify | fingerprint "sha256"}}
 			<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
 		{{end}}
 	{{ end }}
@@ -131,7 +131,11 @@
 {{ end }}
 {{ partial "opengraph.html" . }}
 </head>
-<body>
+
+<body {{if .Site.Params.hcard }} class="h-card" {{end}}>
+	{{if .Site.Params.hcard}}
+		{{ partial "hcard" .}}
+	{{end}}
 	{{ partial "header" . }}
 	{{ block "main" . }}{{ end }}
 	{{ partial "footer" . }}
