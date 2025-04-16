@@ -17,7 +17,7 @@
 			<a href="/"><b>Start</b></a>.
 
 			{{ with .Site.Menus.main }}
-				{{ range sort . ".Identifier" }}
+				{{ range sort . ".Weight" }}
 				<a href="{{ .URL | relLangURL }}"><b>{{ .Name }}</b></a>.
 				{{ end }}
 			{{ end }}
