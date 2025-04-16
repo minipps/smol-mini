@@ -18,7 +18,11 @@
 
 			{{ with .Site.Menus.main }}
 				{{ range sort . ".Weight" }}
-				<a href="{{ .URL | relLangURL }}"><b>{{ .Name }}</b></a>.
+				{{ if .Params.Personal }}
+					<a href="{{ .URL | relLangURL }}" rel="me"><b>{{ .Name }}</b></a>.
+				{{ else }}
+					<a href="{{ .URL | relLangURL }}"><b>{{ .Name }}</b></a>.
+				{{ end }}
 				{{ end }}
 			{{ end }}
 

@@ -1,7 +1,20 @@
 <footer>
 	<p>&copy; {{ now.Year }} <a href="{{ .Site.BaseURL }}"><b>{{ if .Site.Copyright }}{{ .Site.Copyright }}{{ else }}{{ .Site.Title }}{{ end }}</b></a>.
-	{{- range .Site.Menus.footer }}
-	<a href="{{ .URL }}"><b>{{ .Name }}</b></a>.
-        {{- end }}
+	{{- range sort .Site.Menus.footer ".Weight" }}
+	
+	{{if .Params.Personal}}
+		<a href="{{ .URL }}" rel="me"><b>{{ .Name }}</b></a>.
+	{{ else }}
+		<a href="{{ .URL }}"><b>{{ .Name }}</b></a>.
+	{{end}}
+	{{- end }}
 	</p>
+
+	{{with .Site.Params.Webrings}}
+	<p>
+		{{range .}}
+			{{ .html | safeHTML}}
+		{{end}}
+	</p>
+	{{end}}
 </footer>

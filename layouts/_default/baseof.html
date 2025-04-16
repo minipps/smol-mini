@@ -73,6 +73,9 @@
 			"articleBody": {{ .Content | safeJS | htmlUnescape | plainify }}
 		}
 		</script>
+		{{ if .Site.Params.MastodonAttribution }}
+		<meta name="fediverse:creator" content="{{ .Site.Params.MastodonAttribution }}">
+		{{ end }}
 		{{ end }}
 
 		{{ if .IsHome }}
