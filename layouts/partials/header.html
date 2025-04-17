@@ -2,15 +2,15 @@
 	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}<br>
 	== <a href="{{ .Site.BaseURL }}" rel="author">{{ .Site.Title }}</a> ==
 	<div style="float: right;">{{ .Site.Params.subtitle }}</div><br>
-	{{ if hugo.IsMultilingual }}
-	<div style="float: right;">Other languages: 
-	{{ range $.Translations }}
-		<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
-	{{ end }}
+	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}
+	{{ if and hugo.IsMultilingual $.Translations }}
+	 <div style="float: right;">
+	 Other languages:
+		{{ range $.Translations }}
+			<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
+		{{ end }}
 	</div>
-{{ end }}
-
-	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}<br>
+	{{end}}
 	
 	<p>
 	<nav>
@@ -21,10 +21,10 @@
 				<a href="{{ .URL | relLangURL }}" {{if .Params.Personal}}  rel="me" class="u-url" {{ end }}><b>{{ .Name }}</b></a>.
 				{{ end }}
 			{{ end }}
-
 			{{ if .Site.Params.EnableThemeToggle }}
 				<span style="float: right;" class="theme-toggle not-selectable"><span class="theme-toggler" style="cursor: pointer;">toggle theme</a></span>
 			{{ end }}
+			
 			
 	</nav>
 	</p>
