@@ -1,0 +1,14 @@
+<aside style="position: fixed; top: 0; left: 0; transition: ease all .5s;">
+	{{ strings.Repeat 24 "=" }}
+	<div>
+		<div>
+		</div>
+		<div>
+            <img class="u-photo" src="{{ .Site.Params.hcard.photo | absURL }}" loading="lazy"></img>
+            <span class="p-nickname">{{.Site.Params.hcard.nickname}}</span>
+            <span class="u-url" href="{{.Site.BaseURL}}"></span>
+
+		</div>
+	</div>
+	{{ strings.Repeat 24 "=" }}
+</aside>

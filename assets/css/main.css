@@ -248,3 +248,46 @@ img {
     height: auto;
     margin: auto;
 }
+
+aside {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    margin: 40px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+@media (orientation: landscape) and (max-width: 1200px)  {
+    aside {
+        width: 80px;
+        margin: 20px;
+    }
+    aside ul {
+        margin: 0px;
+        padding: 0px;
+    }
+    aside li {
+        margin: 5px;
+        padding: 0px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1000px)  {
+    aside {
+        display: none;
+        
+    }
+
+}
+
+
+@media (orientation: portrait) {
+    aside {
+        display: none;
+        
+    }
+}
