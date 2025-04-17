@@ -3,6 +3,7 @@
 		<article class="h-entry">
 			<h1 class="p-name"><a class="u-url" href="{{.Path | absURL}}">{{ .Title }}</a></h1>
 			<b><time class="dt-published">{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}</time></b>
+			<br>
 		       {{ range .Params.tags }}
 		           <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="p-category">{{ . }}</a>
         	       {{ end }}
@@ -12,5 +13,5 @@
 			</div>
 		</article>
 	</main>
-{{ partial "sidebar.html" . }}
+{{ partial "rightSidebar.html" . }}
 {{ end }}
