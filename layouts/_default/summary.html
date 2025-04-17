@@ -1,6 +1,12 @@
 <article class="h-entry">
 	<h2><a href="{{ .Permalink }}" class="p-name u-url">{{ .Title }}</a></h2>
-	<b><time class="dt-published">{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}</time></b>
+	<b><time class="dt-published">
+		{{ if .PublishDate }}
+			{{ .PublishDate.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
+		{{ else }}
+			{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
+		{{ end }}
+	</time></b>
 	{{ range .Params.tags }}
 	<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
 	{{ end }}
