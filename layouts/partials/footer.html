@@ -3,6 +3,9 @@
 	{{- range sort .Site.Menus.footer ".Weight" }}
 	<a href="{{ .URL }}" {{if .Params.Personal}}  rel="me" class="u-url" {{ end }}><b>{{ .Name }}</b></a>.
 	{{- end }}
+	{{ with .OutputFormats.Get "RSS" -}}
+		<a href="{{.Permalink}}">rss</a>.
+	{{- end }}
 	</p>
 
 	{{with .Site.Params.Webrings}}
