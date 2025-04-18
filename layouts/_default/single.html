@@ -12,7 +12,11 @@
 		       {{ range .Params.tags }}
 		           <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="p-category">{{ . }}</a>
         	       {{ end }}
-			<i>{{ .ReadingTime }} minute read</i>
+
+			{{ if and .Params.replyToURL .Params.replyToText}}
+			in reply to: <a rel="in-reply-to" href="{{.Params.replyToURL | absURL}}">{{.Params.replyToText}}</a>
+			{{end}}
+			<i style="float: right;">{{ .ReadingTime }} minute read</i>
 			<div class="e-content">
 				{{ .Content }}
 			</div>
