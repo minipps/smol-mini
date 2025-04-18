@@ -21,6 +21,8 @@ smol-mini is based on [Smol](https://github.com/colorchestra/smol) by morph whic
 - Catpuccin Latte and Mocha color themes
 - SEO friendly 
 - Multilanguage support 
+- Microformats and other IndieWeb stuff supported!
+- Webmention support
 
 ## Installation
 
