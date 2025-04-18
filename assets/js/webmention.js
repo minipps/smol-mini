@@ -1,3 +1,4 @@
+// TODO: Change this hardcoded file to a Git submodule
 /* webmention.js
 
 Simple thing for embedding webmentions from webmention.io into a page, client-side.
