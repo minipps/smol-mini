@@ -24,6 +24,7 @@
 			<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
 		{{end}}
 	{{ end }}
+
 	{{ range .Site.Params.customCSS -}}
 		<link rel="stylesheet" href="{{ . | relURL }}?rnd={{ now.Unix }}">
 	{{- end }}
@@ -130,6 +131,14 @@
     </title>
 {{ end }}
 {{ partial "opengraph.html" . }}
+{{with .Site.Params.IndieWeb.Webmentions}}
+	{{.URL | safeHTML }}
+	{{ with resources.Get "js/webmention.js" }}
+		{{ with . | minify | fingerprint "sha256"}}
+			<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+		{{end}}
+	{{ end }}
+{{end}}
 </head>
 
 <body {{if .Site.Params.hcard }} class="h-card" {{end}}>
@@ -137,6 +146,9 @@
 		{{ partial "hcard" .}}
 	{{end}}
 	{{ partial "header" . }}
+	{{if and .Site.Params.hcard false}}
+	{{ partial "leftSidebar.html" .}}
+	{{ end }}
 	{{ block "main" . }}{{ end }}
 	{{ partial "footer" . }}
 </body>

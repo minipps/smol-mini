@@ -18,5 +18,8 @@
 			</div>
 		</article>
 	</main>
+	{{ if .Site.Params.Indieweb.Webmentions}}
+		<div id="webmentions" page-url="https://dospuntostr.es/"></div>
+	{{ end}}
 {{ partial "rightSidebar.html" . }}
 {{ end }}
