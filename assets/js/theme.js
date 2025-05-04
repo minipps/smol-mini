@@ -1,52 +1,77 @@
-	// Source: https://github.com/rhazdon/hugo-theme-hello-friend-ng
-	// TODO: Simplify this for my purposes, maybe even switch to HTML + CSS only hackery for darkmode
-	const themeToggle = document.querySelector(".theme-toggle");
-	const chosenTheme = window.localStorage && window.localStorage.getItem("theme");
-	const chosenThemeIsDark = chosenTheme == "dark";
-	const chosenThemeIsLight = chosenTheme == "light";
-
-	// Detect the color scheme the operating system prefers.
-	function detectOSColorTheme() {
-	if (chosenThemeIsDark) {
-		document.documentElement.setAttribute("data-theme", "dark");
-	} else if (chosenThemeIsLight) {
-		document.documentElement.setAttribute("data-theme", "light");
-	} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-		document.documentElement.setAttribute("data-theme", "dark");
-	} else {
-		document.documentElement.setAttribute("data-theme", "light");
+// Credit: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
+/**
+* Utility function to calculate the current theme setting.
+* Look for a local storage value.
+* Fall back to system setting.
+* Fall back to light mode.
+*/
+function calculateSettingAsThemeString({ localStorageTheme, systemSettingDark }) {
+	if (localStorageTheme !== null) {
+	  return localStorageTheme;
 	}
+  
+	if (systemSettingDark.matches) {
+	  return "dark";
 	}
-
-	// Switch the theme.
-	function switchTheme(e) {
-	if (chosenThemeIsDark) {
-		localStorage.setItem("theme", "light");
-	} else if (chosenThemeIsLight) {
-		localStorage.setItem("theme", "dark");
-	} else {
-		if (document.documentElement.getAttribute("data-theme") == "dark") {
-		localStorage.setItem("theme", "light");
-		} else {
-		localStorage.setItem("theme", "dark");
-		}
+  
+	return "light";
+  }
+  
+  /**
+  * Utility function to update the button text and aria-label.
+  */
+  function updateButton({ buttonEl, isDark }) {
+	const newCta = isDark ? "Change to light theme" : "Change to dark theme";
+	// use an aria-label if you are omitting text on the button
+	// and using a sun/moon icon, for example
+	buttonEl.setAttribute("aria-label", newCta);
+	//buttonEl.innerText = newCta;
+  }
+  
+  /**
+  * Utility function to update the theme setting on the html tag
+  */
+  function updateThemeOnHtmlEl({ theme }) {
+	document.querySelector("html").setAttribute("data-theme", theme);
+  }
+  
+  
+  /**
+  * On page load:
+  */
+  
+  /**
+  * 1. Grab what we need from the DOM and system settings on page load
+  */
+  const button = document.querySelector(".theme-toggle");
+  const localStorageTheme = localStorage.getItem("theme");
+  const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
+  
+  /**
+  * 2. Work out the current site settings
+  */
+  let currentThemeSetting = calculateSettingAsThemeString({ localStorageTheme, systemSettingDark });
+  
+  /**
+  * 3. Update the theme setting and button text accoridng to current settings
+  */
+  updateButton({ buttonEl: button, isDark: currentThemeSetting === "dark" });
+  updateThemeOnHtmlEl({ theme: currentThemeSetting });
+  
+  /**
+  * 4. Add an event listener to toggle the theme
+  */
+  button.addEventListener("click", (event) => {
+	const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
+	localStorage.setItem("theme", newTheme);
+	currentThemeSetting = newTheme;
+	if (!document.startViewTransition) {
+		updateButton({ buttonEl: button, isDark: newTheme === "dark" });
+		updateThemeOnHtmlEl({ theme: newTheme });
+		return;
 	}
-
-	detectOSColorTheme();
-	window.location.reload();
-	}
-
-	// Event listener
-	if (themeToggle) {
-	themeToggle.addEventListener("click", switchTheme, false);
-	window
-		.matchMedia("(prefers-color-scheme: dark)")
-		.addEventListener("change", (e) => e.matches && detectOSColorTheme());
-	window
-		.matchMedia("(prefers-color-scheme: light)")
-		.addEventListener("change", (e) => e.matches && detectOSColorTheme());
-
-	detectOSColorTheme();
-	} else {
-	localStorage.removeItem("theme");
-	}
+	const transition = document.startViewTransition(() => {
+		updateButton({ buttonEl: button, isDark: newTheme === "dark" });
+		updateThemeOnHtmlEl({ theme: newTheme });
+	})
+  }); 

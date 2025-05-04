@@ -1,5 +1,7 @@
 html {
     overflow-y: scroll;
+    transition: all 1s ease-in-out;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Hugo minifying kinda wrecked importing so I'm hardcoding these here */
@@ -169,7 +171,7 @@ html {
 
   }
 
-:root[data-theme=light] {
+[data-theme=light] {
     --bgcolor: var(--ctp-latte-base);
     --fontcolor: var(--ctp-latte-text);
     --linkcolor: var(--ctp-latte-blue);
@@ -184,7 +186,7 @@ html {
 
 
 
-:root[data-theme=dark] {
+[data-theme=dark] {
     --bgcolor: var(--ctp-mocha-base);
     --fontcolor: var(--ctp-mocha-text);
     --linkcolor: var(--ctp-mocha-blue);
@@ -405,4 +407,8 @@ aside {
 #webmentions .comments li .name {
     color: #111;
 }
+
+@view-transition {
+    navigation: auto;
+  }
 
