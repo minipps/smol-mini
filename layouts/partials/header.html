@@ -1,25 +1,21 @@
 <header>
-	{{ if hugo.IsServer }}
-		<code>{{ debug.Dump .}}  </code></br>
-	{{ end }}
-	
-
 	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}<br>
 	== <a href="{{ .Site.BaseURL }}" rel="author">{{ .Site.Title }}</a> ==
 	<div style="float: right;">{{ .Site.Params.subtitle }}</div><br>
 	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}
 	{{ if and hugo.IsMultilingual $.Translations }}
 	 <div style="float: right;">
-	 Other languages:
+	 {{ i18n "postAvailable" }}:
 		{{ range $.Translations }}
-			<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>{{ .Language }}</b></a>
+			<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>
+				{{ .Language.Params.LanguageName }}</b></a>
 		{{ end }}
 	</div>
 	{{end}}
 	
 	<p>
 	<nav>	
-			<a href="/" {{if .IsHome }} style="font-weight: bold;" {{ end }}>Start</a>.
+			<a href="/" {{if .IsHome }} style="font-weight: bold;" {{ end }}>{{i18n "home" }}</a>.
 
 			{{ with .Site.Menus.main }}
 				{{ range sort . ".Weight" }}
@@ -31,7 +27,7 @@
 			{{ end }}
 			{{ if .Site.Params.EnableThemeToggle }}
 			<button style="float: right;">
-				<span class="theme-toggle not-selectable"><span class="theme-toggler" style="cursor: pointer;">toggle theme</a></span>
+				<span class="theme-toggle not-selectable"><span class="theme-toggler" style="cursor: pointer;">{{i18n "theme"}}</a></span>
 			</button>
 			{{ end }}
 			

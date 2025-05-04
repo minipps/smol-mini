@@ -1,0 +1,56 @@
+# Translations for Spanish
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# Generic
+#
+[translations]
+other = "Traducciones"
+
+[postAvailable]
+other = "También disponible en"
+
+[theme]
+other = "cambiar tema"
+
+# 404.html
+#
+[archives]
+other = "Archivo"
+
+[home]
+other = "Inicio"
+
+[notFound]
+other = "Oops, página no encontrada…"
+
+[goBack]
+other = "Deseas volver al inicio?"
+
+# posts/single.html
+#
+[readingTime]
+one   = "Un minuto"
+other = "{{ .Count }} minutos"
+
+[tableOfContents]
+other = "Tabla de Contenido"
+
+[wordCount]
+one   = "Una Palabra"
+other = "{{ .Count }} palabras"
+
+[lastModified]
+other = "Ultima actualización"
+
+[replyTo]
+other = "En respuesta a"
+# partials/pagination-list.html
+[pagination]
+newerPosts = "Entradas más recientes"
+olderPosts = "Entradas antiguas"
+totalPosts = "Página {{ .Current }} de {{ .Total }}"
+[summary]
+readMore = "Seguir leyendo..."
+
+[sidebar]
+latestPosts = "ÚLTIMOS POSTS"

@@ -1,9 +1,9 @@
 <div>
 {{ if .Paginator.HasPrev }}
-	<a href="{{ .Paginator.Prev.URL }}">Previous Page</a>
+	<a href="{{ .Paginator.Prev.URL }}">{{ i18n "pagination.olderPosts"}}</a>
 {{ end }}
-{{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}
+{{i18n "pagination.totalPosts" (dict "Current" .Paginator.PageNumber "Total" .Paginator.TotalPages) }}
 {{ if .Paginator.HasNext }}
-	<a href="{{ .Paginator.Next.URL }}">Next Page</a>
+	<a href="{{ .Paginator.Next.URL }}">{{ i18n "pagination.olderPosts" }}</a>
 {{ end }}
 </div>

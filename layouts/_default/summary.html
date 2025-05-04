@@ -13,7 +13,7 @@
 	<div class="p-summary">
 		{{ .Summary }}
 		{{ if .Truncated }}
-			<a href="{{ .Permalink }}">Read more...</a>
+			<a href="{{ .Permalink }}">{{i18n "summary.readMore"}}</a>
 		{{ end }}
 	</div>
 </article>

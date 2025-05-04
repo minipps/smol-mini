@@ -1,7 +1,7 @@
 {{ define "main" }}
 	<main>
 		{{ if .Page.IsHome }} 
-		<h1 style="display: none;">{{ .Site.Title }} </h1>
+		<h1 style="display: none;">{{ .Site.Title }}</h1>
 		{{ end }}
 		<div class="h-feed">
 		{{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" .Site.Params.mainSections) }}
