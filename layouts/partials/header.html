@@ -1,4 +1,9 @@
 <header>
+	{{ if hugo.IsServer }}
+		<code>{{ debug.Dump .}}  </code></br>
+	{{ end }}
+	
+
 	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}<br>
 	== <a href="{{ .Site.BaseURL }}" rel="author">{{ .Site.Title }}</a> ==
 	<div style="float: right;">{{ .Site.Params.subtitle }}</div><br>
@@ -13,16 +18,21 @@
 	{{end}}
 	
 	<p>
-	<nav>
-			<a href="/"><b>Start</b></a>.
+	<nav>	
+			<a href="/" {{if .IsHome }} style="font-weight: bold;" {{ end }}>Start</a>.
 
 			{{ with .Site.Menus.main }}
 				{{ range sort . ".Weight" }}
-				<a href="{{ .URL | relLangURL }}" {{if .Params.Personal}}  rel="me" class="u-url" {{ end }}><b>{{ .Name }}</b></a>.
+				{{ $urlSplit := split (.URL | relLangURL) "/"}}
+				{{ $urlPrefix := delimit (last 2 $urlSplit) ""  }}
+				<a href="{{ .URL | relURL }}" {{if .Params.Personal}}  rel="me" class="u-url" {{ end }} 
+				{{ if strings.Contains $.Path $urlPrefix}} style="font-weight: bold;" {{end}}>{{ .Name }}</a>.
 				{{ end }}
 			{{ end }}
 			{{ if .Site.Params.EnableThemeToggle }}
-				<span style="float: right;" class="theme-toggle not-selectable"><span class="theme-toggler" style="cursor: pointer;">toggle theme</a></span>
+			<button style="float: right;">
+				<span class="theme-toggle not-selectable"><span class="theme-toggler" style="cursor: pointer;">toggle theme</a></span>
+			</button>
 			{{ end }}
 			
 			
