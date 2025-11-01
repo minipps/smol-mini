@@ -170,8 +170,22 @@ html {
     --ctp-mocha-crust: #11111b;
     --ctp-mocha-crust-rgb: 17 17 27;
     --ctp-mocha-crust-hsl: 240.000 22.727% 8.627%;
-
+    --is-scrollable: 0; /* prevent progressbar flickering if not scrollable*/
+    --has-js: 0;
   }
+
+:not([data-theme]) { /* default for noscript users */
+    --bgcolor: var(--ctp-latte-base);
+    --fontcolor: var(--ctp-latte-text);
+    --linkcolor: var(--ctp-latte-blue);
+    --visitedcolor: var(--ctp-latte-mauve);
+    --precolor: var(--ctp-latte-base);
+    --prebgcolor: var(--ctp-latte-text);  
+    --subtitlecolor: var(--ctp-latte-subtext0);
+    --figcolor: var(--ctp-latte-subtext1);   
+    --selectioncolor: color-mix(in srgb, var(--ctp-latte-overlay2), transparent 70%);
+    --caretcolor: var(--ctp-latte-rosewater);
+}
 
 [data-theme=light] {
     --bgcolor: var(--ctp-latte-base);
@@ -433,6 +447,7 @@ hr {
 
 
 #progress-bar-percentages {
+    opacity: calc(var(--is-scrollable) + calc(1 - var(--has-js)));
     display: grid;
     position: sticky; 
     top: 0; 
@@ -443,7 +458,9 @@ hr {
     line-height: 1rem; 
 }
 
+
 #progress-bar-main {
+    opacity: calc(var(--is-scrollable) + calc(1 - var(--has-js)));
     position: sticky; 
     left: 0; 
     top: 1rem; 
@@ -454,6 +471,7 @@ hr {
 }
 
 #progress-bar-backdrop {
+    opacity: calc(var(--is-scrollable) + calc(1 - var(--has-js)));
     position: sticky; 
     left: 0; 
     top: 1rem; 
@@ -466,12 +484,14 @@ hr {
 
 
 #progress-bar-container {
+    opacity: calc(var(--is-scrollable) + calc(1 - var(--has-js)));
     position: absolute; 
-    top: 50px; 
+    top: 90px; 
     left: 0; 
     right: 0;
-    bottom: 20%;
+    bottom: 0;
     z-index: -10;
     background-image: linear-gradient(to bottom left, var(--bgcolor) 50%, transparent 50%); 
     background-color: transparent; 
 }
+

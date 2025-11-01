@@ -82,3 +82,20 @@ button.addEventListener("click", (event) => {
     updateThemeOnHtmlEl({ theme: newTheme });
   });
 });
+
+
+// Progressbar stuff
+document.documentElement.style.setProperty(
+  '--has-js',
+  1
+);
+document.documentElement.style.setProperty(
+  '--is-scrollable',
+  document.documentElement.scrollHeight > window.innerHeight ? 1 : 0
+);
+document.addEventListener('resize', () => {
+  document.documentElement.style.setProperty(
+    '--is-scrollable',
+    document.documentElement.scrollHeight > window.innerHeight ? 1 : 0
+  );
+});
