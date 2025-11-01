@@ -2,6 +2,8 @@ html {
     overflow-y: scroll;
     transition: all 1s ease-in-out;
     -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    height: auto;
 }
 
 /* Hugo minifying kinda wrecked importing so I'm hardcoding these here */
@@ -202,10 +204,14 @@ html {
 
 
 body {
+    position: relative;
     max-width: 800px;
+    min-height: 100%;
+    height: auto;
     margin: 40px auto;
     padding: 0 10px;
-    font: 14px/1.5 monospace;
+    font: 16px/1.4 monospace;
+    font-weight: 550;   
     color: var(--fontcolor);
     background: var(--bgcolor);
     caret-color: var(--caretcolor)
@@ -226,6 +232,7 @@ button {
     background: var(--bgcolor);
     color: var(--fontcolor);
     border: 1px solid var(--fontcolor);
+    display: inline-block;
     padding: 4px 8px;
     border-radius: 4px;
     cursor: pointer;
@@ -349,7 +356,7 @@ aside {
     font-size: medium;
     margin: 0;
     padding: 2px;
-    background: #ccc;
+    background: var(--subtitlecolor);
 }
 
 #webmentions .reacts img {
@@ -375,7 +382,7 @@ aside {
 #webmentions a.reaction {
     position: relative;
     text-decoration: none;
-    text-shadow: 0px 0px 3px white;
+    text-shadow: 0px 0px 3px var(--bgcolor);
     margin-right: 0;
     letter-spacing: -1ex;
     margin-right: 1ex;
@@ -405,10 +412,66 @@ aside {
 }
 
 #webmentions .comments li .name {
-    color: #111;
+    color: var(--precolor);
 }
 
 @view-transition {
     navigation: auto;
-  }
+}
 
+.invisible {
+    display: none !important;
+    height: 0px !important;
+    width: 0px !important;
+}
+
+hr {
+    border: none;
+    border-top: 1px double var(--fontcolor);
+  }
+  
+
+
+#progress-bar-percentages {
+    display: grid;
+    position: sticky; 
+    top: 0; 
+    left: 0; 
+    padding-top: 0.25rem; 
+    grid-template-columns: repeat(3, minmax(0, 1fr)); 
+    font-size: 0.75rem;
+    line-height: 1rem; 
+}
+
+#progress-bar-main {
+    position: sticky; 
+    left: 0; 
+    top: 1rem; 
+    width: 100%; 
+    height: 1rem; 
+    background-color:color-mix(in srgb,  var(--linkcolor), transparent 50%);
+    z-index: -20 !important;
+}
+
+#progress-bar-backdrop {
+    position: sticky; 
+    left: 0; 
+    top: 1rem; 
+    width: 100%; 
+    height: 1rem; 
+    background-color: transparent;
+    z-index: -20;
+    border: 1px solid var(--fontcolor);
+}
+
+
+#progress-bar-container {
+    position: absolute; 
+    top: 50px; 
+    left: 0; 
+    right: 0;
+    bottom: 20%;
+    z-index: -10;
+    background-image: linear-gradient(to bottom left, var(--bgcolor) 50%, transparent 50%); 
+    background-color: transparent; 
+}

@@ -1,31 +1,41 @@
 {{ define "main" }}
 {{ if .Site.Params.Breadcrumbs}}
-	{{ partial "breadcrumbs.html" . }}
+{{ partial "breadcrumbs.html" . }}
 {{ end }}
-	<main>
-		<article class="h-entry">
-			<h1 class="p-name"><a class="u-url" href="{{.Path | absURL}}">{{ .Title }}</a></h1>
-			<b><time class="dt-published">
+<main>
+	<div id="progress-bar-container"></div>
+	<div id="progress-bar-backdrop">
+		<div id="progress-bar-main"></div>
+	</div>
+	<div id="progress-bar-percentages">
+		<div>0%</div>
+		<div style="justify-self: center;">50%</div>
+		<div style="justify-self: end;">100%</div>
+	</div>
+	<article class="h-entry">
+
+		<h1 class="p-name"><a class="u-url" href="{{.Path | absURL}}">{{ .Title }}</a></h1>
+		<b><time class="dt-published">
 				{{ if .PublishDate }}
-					{{ .PublishDate.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
+				{{ .PublishDate.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
 				{{ else }}
-					{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
+				{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
 				{{ end }}
 			</time></b>
-		       {{ range .Params.tags }}
-		           <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="p-category">{{ . }}</a>
-        	       {{ end }}
-			{{ if and .Params.replyToURL .Params.replyToText}}
-			{{i18n "replyTo"}}: <a rel="in-reply-to" href="{{.Params.replyToURL | absURL}}">{{.Params.replyToText}}</a>
-			{{end}}
-			<i style="float: right;"> {{ i18n "wordCount" .Page.WordCount }}, {{i18n "readingTime" .ReadingTime }}</i>
-			<div class="e-content">
-				{{ .Content }}
-			</div>
-		</article>
-	</main>
-	{{ if .Site.Params.Indieweb.Webmentions}}
-		<div id="webmentions" page-url="https://dospuntostr.es/"></div>
-	{{ end}}
+		{{ range .Params.tags }}
+		<a href="{{ " /tags/" | relLangURL }}{{ . | urlize }}" class="p-category">{{ . }}</a>
+		{{ end }}
+		{{ if and .Params.replyToURL .Params.replyToText}}
+		{{i18n "replyTo"}}: <a rel="in-reply-to" href="{{.Params.replyToURL | absURL}}">{{.Params.replyToText}}</a>
+		{{end}}
+		<i style="float: right;"> {{ i18n "wordCount" .Page.WordCount }}, {{i18n "readingTime" .ReadingTime }}</i>
+		<div class="e-content">
+			{{ .Content }}
+		</div>
+	</article>
+</main>
+{{ if .Site.Params.Indieweb.Webmentions}}
+<div id="webmentions" page-url="https://dospuntostr.es/"></div>
+{{ end}}
 {{ partial "rightSidebar.html" . }}
 {{ end }}
