@@ -7,9 +7,10 @@
 			{{ with .Content }}<div>{{ . }}</div>{{ end }}
 		</div>
 		{{ end }}
-		
+		 {{ range .Paginator.Pages.GroupByParam "Type"}}
+        <h1>{{ .Key | title }}</h1>
 		<ul>
-		    {{ range .Paginator.Pages }}
+            {{ range .Pages }}
 		    <li class="h-entry">
 		        <div class="post-title">
 				{{ if eq $listtitle "Posts" }}
@@ -19,8 +20,10 @@
 				{{ end }}
 		        </div>
 		    </li>
-		    {{ end }}
+            {{end}}
+		    
 		</ul>
+        {{ end }}
 		{{ partial "pagination.html" . }}
 	</main>
 {{ end }}
