@@ -85,17 +85,53 @@ button.addEventListener("click", (event) => {
 
 
 // Progressbar stuff
-document.documentElement.style.setProperty(
+const root = document.documentElement;
+const progressBarMain = document.getElementById('progress-bar-main');
+
+root.style.setProperty(
   '--has-js',
   1
 );
-document.documentElement.style.setProperty(
-  '--is-scrollable',
-  document.documentElement.scrollHeight > window.innerHeight ? 1 : 0
-);
-document.addEventListener('resize', () => {
-  document.documentElement.style.setProperty(
+
+const syncScrollableFlag = () => {
+  const isScrollable = root.scrollHeight > window.innerHeight;
+  root.style.setProperty(
     '--is-scrollable',
-    document.documentElement.scrollHeight > window.innerHeight ? 1 : 0
+    isScrollable ? 1 : 0
   );
-});
+  return isScrollable;
+};
+
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+let scheduledFrame = null;
+const updateProgress = () => {
+  const scrollableHeight = root.scrollHeight - window.innerHeight;
+  const progress = scrollableHeight <= 0
+    ? 0
+    : clamp(window.scrollY / scrollableHeight, 0, 1);
+  root.style.setProperty('--scroll-progress', progress.toFixed(4));
+  scheduledFrame = null;
+};
+
+const requestProgressUpdate = () => {
+  if (scheduledFrame !== null) return;
+  scheduledFrame = requestAnimationFrame(updateProgress);
+};
+
+const initProgressBar = () => {
+  syncScrollableFlag();
+  if (!progressBarMain) return;
+
+  updateProgress();
+  window.addEventListener('scroll', requestProgressUpdate, { passive: true });
+  window.addEventListener('resize', () => {
+    const scrollable = syncScrollableFlag();
+    if (!scrollable) {
+      root.style.setProperty('--scroll-progress', 0);
+    }
+    requestProgressUpdate();
+  });
+};
+
+initProgressBar();
