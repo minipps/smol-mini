@@ -174,18 +174,7 @@ html {
     --has-js: 0;
   }
 
-:not([data-theme]) { /* default for noscript users */
-    --bgcolor: var(--ctp-latte-base);
-    --fontcolor: var(--ctp-latte-text);
-    --linkcolor: var(--ctp-latte-blue);
-    --visitedcolor: var(--ctp-latte-mauve);
-    --precolor: var(--ctp-latte-base);
-    --prebgcolor: var(--ctp-latte-text);  
-    --subtitlecolor: var(--ctp-latte-subtext0);
-    --figcolor: var(--ctp-latte-subtext1);   
-    --selectioncolor: color-mix(in srgb, var(--ctp-latte-overlay2), transparent 70%);
-    --caretcolor: var(--ctp-latte-rosewater);
-}
+
 
 [data-theme=light] {
     --bgcolor: var(--ctp-latte-base);
@@ -310,14 +299,21 @@ img {
 
 aside {
     height: 100%;
-    width: 160px;
-    position: fixed;
+    width: 240px;
+    position: absolute;
     z-index: 1;
     top: 0;
-    right: 0;
+    left: 0;
     margin: 40px;
     overflow-x: hidden;
     overflow-y: hidden;
+}
+
+@media (orientation: landscape) and (max-width: 1920)  {
+    aside {
+        width: 160px;
+        margin: 40px;
+    }
 }
 
 @media (orientation: landscape) and (max-width: 1200px)  {
@@ -463,7 +459,7 @@ hr {
     opacity: calc(var(--is-scrollable) + calc(1 - var(--has-js)));
     position: sticky; 
     left: 0; 
-    top: 1rem; 
+    top: 1.5rem; 
     width: 100%; 
     height: 1rem; 
     background-color: color-mix(in srgb,  var(--linkcolor), transparent 50%);
@@ -478,7 +474,7 @@ hr {
     opacity: calc(var(--is-scrollable) + calc(1 - var(--has-js)));
     position: sticky; 
     left: 0; 
-    top: 1rem; 
+    top: 1.5rem; 
     width: 100%; 
     height: 1rem; 
     background-color: transparent;
@@ -490,10 +486,9 @@ hr {
 #progress-bar-container {
     opacity: calc(var(--is-scrollable) + calc(1 - var(--has-js)));
     position: absolute; 
-    top: 90px; 
+    top: 2rem; 
     left: 0; 
     right: 0;
-    bottom: 0;
     z-index: -10;
 }
 
