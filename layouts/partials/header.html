@@ -1,6 +1,6 @@
 <header>
 	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}<br>
-	== <a href="{{ .Site.BaseURL }}" rel="author">{{ .Site.Title }}</a> ==
+	== <a href="{{ .Site.BaseURL }}{{ .Site.Language }}" hreflang="{{ .Site.Language }}" rel="author">{{ .Site.Title }}</a> ==
 	<div style='float: right !important;'>{{ .Site.Params.subtitle }}</div><br>
 	{{ strings.Repeat ( .Site.Title | len | add 6 ) "=" }}
 	{{ if and hugo.IsMultilingual $.Translations }}
@@ -8,7 +8,7 @@
 	 {{ i18n "postAvailable" }}:
 		{{ range $.Translations }}
 		{{ if not .Language.Params.Disabled }}
-			<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" href="{{ .Permalink }}"><b>
+			<a title="{{ .Language }}" hreflang="{{ .Site.Language }}" rel="alternate" href="{{ .Permalink }}"><b>
 				{{ .Language.Params.LanguageName }}</b></a>
 		{{ end }}
 		{{ end }}
@@ -17,7 +17,7 @@
 	<br>
 	<hr>
 		<nav>	
-			<a href="/" {{if .IsHome }} style="font-weight: bold;" {{ end }}>{{i18n "home" }}</a>.
+			<a href="{{ .Site.BaseURL }}{{ .Site.Language }}" hreflang="{{ .Site.Language }}" {{if .IsHome }} style="font-weight: bold;" {{ end }}>{{i18n "home" }}</a>.
 
 			{{ with .Site.Menus.main }}
 				{{ range sort . ".Weight" }}

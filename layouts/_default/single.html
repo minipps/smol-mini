@@ -22,13 +22,13 @@
 				{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
 				{{ end }}
 			</time></b>
+			<i style="float: right;"> {{ i18n "wordCount" .Page.WordCount }}, {{i18n "readingTime" .ReadingTime }}</i></br>
 		{{ range .Params.tags }}
 		<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="p-category">{{ . }}</a>
 		{{ end }}
 		{{ if and .Params.replyToURL .Params.replyToText}}
 		{{i18n "replyTo"}}: <a rel="in-reply-to" href="{{.Params.replyToURL | absURL}}">{{.Params.replyToText}}</a>
 		{{end}}
-		<i style="float: right;"> {{ i18n "wordCount" .Page.WordCount }}, {{i18n "readingTime" .ReadingTime }}</i>
 		<div class="e-content">
 			{{ .Content }}
 		</div>

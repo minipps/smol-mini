@@ -18,7 +18,7 @@
 	<link rel="canonical" href="{{ .Permalink }}" />
 	{{ with resources.Get "css/main.css" }}
 		{{ with . | minify | fingerprint}}
-			<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+			<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" >
 		{{end }}
 	{{ end }}
 	{{ with resources.Get "js/theme.js" }}
@@ -27,8 +27,8 @@
 		{{end}}
 	{{ end }}
 
-	{{ range .Site.Params.customCSS -}}
-		<link rel="stylesheet" href="{{ . | relURL }}?rnd={{ now.Unix }}">
+	{{ range .Site.Params.customCSS }}
+		<link rel="stylesheet" href="{{ . | relURL }}?rnd={{ now.Unix }}" >
 	{{- end }}
 	{{ with .OutputFormats.Get "RSS" -}}
 		{{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
@@ -142,6 +142,14 @@
 	{{ end }}
 {{end}}
 {{ partial "favicons.html" . }}
+
+{{ if and hugo.IsMultilingual $.Translations }}
+	{{ range $.Translations }}
+	{{ if not .Language.Params.Disabled }}
+		<link title="{{ .Language }}" hreflang="{{ .Site.Language }}" rel="alternate" href="{{ .Permalink }}">
+	{{ end }}
+	{{ end }}
+{{end}}
 </head>
 
 <body {{if .Site.Params.hcard }} class="h-card" {{end}}>

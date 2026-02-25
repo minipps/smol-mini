@@ -1,14 +1,19 @@
 <article class="h-entry">
-	<h2><a href="{{ .Permalink }}" class="p-name u-url">{{ .Title }}</a></h2>
-	<b><time class="dt-published">
+	<h2 style="display: inline"><a href="{{ .Permalink }}" class="p-name u-url">{{ .Title }}</a></h2>
+	<b><time class="dt-published" style="float: right">
 		{{ if .PublishDate }}
 			{{ .PublishDate.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
 		{{ else }}
 			{{ .Date.Format (default "2006-01-02 15:04:05" .Site.Params.dateFmt) }}
 		{{ end }}
 	</time></b>
-	{{ range .Params.tags }}
-	<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+	</br>
+	{{ if .Params.tags }}
+		<span> <!-- style="display: flex; justify-content: flex-end; gap: 8px;" --> 
+		{{ range .Params.tags }}
+			<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+		{{ end }}
+		</span>
 	{{ end }}
 	<div class="p-summary">
 		{{ .Summary }}
